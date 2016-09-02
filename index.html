@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="ad.size" content="width=300,height=250">
+    <script type="text/javascript"> var clickTag = "https://www.intertrader.com"; </script>
+    <title>aniated object test</title>
+    <style>
+        body { font-family: Helvetica, Arial, sans-serif; margin: 0; padding: 0; }
+        a { width: 100vw; height: 100vh; }
+        
+        .content { width: 300px; height: 250px; border: 0px; overflow: hidden; position: relative; background: url('./big_bg.jpg') top center no-repeat; background-size: 100%; }
+        .content > div { position: absolute; top:0; left: 0; }
+        
+        #logo { width: 300px; height: 50px; background: #000 url('./logo.png') center center no-repeat; background-size: auto 85px; box-shadow: 0px -25px 60px 45px rgba(0,0,0,1); z-index: 3; }
+        
+        #car { width: 490px; height: 170px; margin-left: -85px; margin-top: 0px; background: url('./big_car.png') top center no-repeat; background-size: 100% auto; }
+        
+        .start-text { margin-top: -182px; margin-left: -1016px; }
+        .end-text { margin-top: -170px; margin-left: -1016px; }
+        
+        #text-object { width:270px; height: 140px; padding:15px; text-align: center; color: #000; top:0px; opacity: 0; visibility: hidden; display: none; }
+        #text-object strong { font-size: 56px; color: #fff; text-shadow: 1px 1px 0px rgba(0,0,0,0.3); display: inline-block; padding-top: 10px; }
+        
+        #text-object.frame_1 { line-height: 45px; font-size: 34px; }
+        #text-object.frame_2 { line-height: 45px; font-size: 34px; }
+        #text-object.frame_3 { line-height: 14px; font-size: 13px; letter-spacing: 0.1px; background: #000; color: #fff; margin-top: -50px; padding-top: 60px; padding-bottom: 20px; }
+        #text-object.frame_4 { line-height: 24px; font-size: 27px; }
+        #text-object.frame_4 strong { line-height: 33px; font-size: 38px; padding: 0 0 3px; }
+        #text-object.frame_4 small { padding-top: 10px; }
+        #text-object.frame_5 { line-height: 24px; font-size: 24px; }
+        
+        .button {
+            width: 220px;
+            height: 50px;
+            line-height: 50px;
+            margin: 15px auto 30px;
+            font-size: 19px;
+            letter-spacing: 0.3px;
+            border-radius: 5px;
+            background: #00aaff;
+            box-shadow: 0px 0px 0px 1px rgba(255,255,255,0.2);
+            color: #fff;
+        }
+        
+        .final_frame {
+            line-height: 18px;
+        }
+        
+        .final_frame .button {
+            margin-bottom: 15px;
+            background: #000;
+        }
+        
+        small { display: block; line-height: 12px; font-size: 10px; letter-spacing: 0.1px; }
+        
+    </style>
+    <script src="./animateOject.js"></script>
+    <script>
+        
+        var frame_1 = '<div id="car"></div><div class="start-text">Up to<br /><strong>£10,000</strong><br />trading credit*</div>';
+        var frame_2 = 'For all <strong>new</strong> accounts*';
+        var frame_3 = 'Your trading credit is 10% of your 1st deposit over £500 (within 6 months of opening), to a maximum £10,000. You must stake at least double the credit amount (risking considerably more than this amount) to convert credit to cash and withdraw. Excludes equities and MT4. New clients on the web platform only. See website for full terms.';
+        var frame_4 = '<strong>100%<br />market-neutral</strong> means we never trade against you<small>All trading involves risk, and losses can exceed deposits</small>';
+        var frame_5 = '<div class="button">APPLY NOW</div><small>InterTrader is a trading name of InterTrader Ltd, authorised and regulated by the Gibraltar Financial Services Commission and registered with the FCA, ref 597312.</small>';
+        
+        var final_frame = '<div id="car"></div><div class="end-text"><span>Losses can exceed deposits</span><div class="button">APPLY NOW</div><em>No Dealing Desk<br />spread betting, CFDs & FX</em></div>';
+        
+        var top_al = 80;
+        var left_al = 0;
+        
+        var anim = new animateOject({
+            id:'text-object',
+            start:'hidden', // hidden | visible
+            timeline: [
+                { anim:'fade-in&slide', duration:'0ms', addClass: 'frame_1', distance:[top_al, left_al], content:frame_1 },
+                { anim:'pause', duration:'500ms' },
+                { anim:'slide', duration:'700ms', distance:[top_al, (left_al + 510)], ease:'cubic-bezier(0.07,-0.35, 0.92, 1.35)' },
+                { anim:'pause', duration:'2000ms' },
+                { anim:'fade-out&slide', duration:'150ms', distance:[top_al, (left_al + 530)] },
+                { anim:'pause', duration:'0ms', removeClass:'frame_1' },
+                
+                { anim:'pause&slide', duration:'0ms', addClass: 'frame_2', distance:[top_al, (left_al - 20)] },
+                { anim:'fade-in&slide', duration:'150ms', content:frame_2, distance:[top_al, left_al] },
+                { anim:'pause', duration:'1700ms' },
+                { anim:'fade-out&slide', duration:'150ms', distance:[top_al, (left_al + 20)] },
+                { anim:'pause', duration:'0ms', removeClass:'frame_2' },
+                
+                { anim:'pause&slide', duration:'0ms', addClass: 'frame_3', distance:[top_al, left_al] },
+                { anim:'fade-in&slide', duration:'150ms', content:frame_3, distance:[top_al, left_al] },
+                { anim:'pause', duration:'4500ms' },
+                { anim:'fade-out&slide', duration:'150ms', distance:[top_al, left_al] },
+                { anim:'pause', duration:'0ms', removeClass:'frame_3' },
+                
+                { anim:'pause&zoom', duration:'0ms', addClass: 'frame_4', z_to:0.1 },
+                { anim:'fade-in&zoom', duration:'150ms', content:frame_4, z_to:1 },
+                { anim:'pause', duration:'2800ms' },
+                { anim:'fade-out&zoom', duration:'150ms', z_to:0.1 },
+                { anim:'pause', duration:'0ms', removeClass:'frame_4' },
+                
+                { anim:'pause', duration:'0ms', addClass: 'frame_5' },
+                { anim:'fade-in&zoom', duration:'150ms', content:frame_5, z_to:1 },
+                { anim:'pause', duration:'4000ms' },
+                { anim:'fade-out', duration:'150ms' },
+                { anim:'pause', duration:'0ms', removeClass:'frame_5' },
+                
+                { anim:'fade-in&slide', duration:'0ms', distance:[top_al,(left_al - 240)], addClass: 'frame_1', content:frame_1 },
+                { anim:'slide', duration:'350ms', distance:[top_al,left_al], ease:'cubic-bezier(0.29, 0.74, 0.82, 1.18)' },
+                { anim:'pause', duration:'200ms' },
+                
+                { anim:'go', to:1, and:'play-and-skip-go' },
+                { anim:'go', to:1, and:'play-and-skip-go' },
+                
+                { anim:'pause', duration:'0ms', removeClass:'frame_1' },
+                { anim:'pause', duration:'0ms', addClass: 'final_frame', content:final_frame },
+                { anim:'pause', duration:'500ms' },
+                { anim:'slide', duration:'700ms', distance:[top_al, (left_al + 510)], ease:'cubic-bezier(0.07,-0.35, 0.92, 1.35)' }
+            ]
+        });
+    </script>
+</head>
+<body>
+    <a href="javascript:window.open(window.clickTag)">
+        <div class="content">
+           <div id="logo"></div>
+            <div id="text-object"></div>
+        </div>
+    </a>
+</body>
+</html>
